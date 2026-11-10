@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouOkay? (YoKi) – Your Digital Habits. Your Mental Wellbeing.</title>
+  <meta name="description" content="YouOkay? (YoKi) is a machine learning project that relates social media habits and lifestyle to a predicted wellbeing score.">
+  <!-- Favicon: standalone YoKi icon, inline SVG -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2C8.8 2 3 7.6 3 14.5c0 3.6 1.6 6.8 4.2 9L5.5 29.5l6.2-3.2c1.4.4 2.8.6 4.3.6 7.2 0 13-5.6 13-12.5S23.2 2 16 2Z' fill='%238b7cf6'/%3E%3Cpath d='M11.5 11.5a4.5 4.5 0 1 1 6.6 4c-1.4.8-2.1 1.7-2.1 3' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M13.4 21.6q2.6 2.6 5.2 0' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+<!-- ORIGINAL YoKi LOGO: a speech-bubble whose "?" ends in a smile (bubble = connection, ? = curiosity, smile = wellbeing) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="yk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a99bff"/><stop offset="1" stop-color="#7f9cf5"/></linearGradient>
+    <symbol id="yoki-mark" viewBox="0 0 32 32">
+      <path d="M16 2C8.8 2 3 7.6 3 14.5c0 3.6 1.6 6.8 4.2 9L5.5 29.5l6.2-3.2c1.4.4 2.8.6 4.3.6 7.2 0 13-5.6 13-12.5S23.2 2 16 2Z" fill="url(#yk)"/>
+      <path d="M11.5 11.5a4.5 4.5 0 1 1 6.6 4c-1.4.8-2.1 1.7-2.1 3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M13.4 21.6q2.6 2.6 5.2 0" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Ambient background layer: floating orbs + cursor-following glow (behind all content) -->
+<div class="ambient" id="ambient" aria-hidden="true">
+  <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span>
+  <span class="spot"></span>
+</div>
+<div class="particles" id="particles" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<header class="nav" id="nav">
+  <a href="#home" class="logo" aria-label="YoKi – home"><svg class="logo-mark"><use href="#yoki-mark"/></svg><span class="wordmark">Yo<b>Ki</b></span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><i data-lucide="menu"></i></button>
+  <nav class="nav-links" id="navLinks">
+    <a href="#home">Home</a><a href="#about">About</a><a href="#how">How It Works</a>
+    <a href="#assessment">Assessment</a><a href="#insights">Insights</a><a href="#developer">Developer</a>
+  </nav>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero dark" id="home">
+  <div class="hero-copy">
+    <p class="brandline"><svg class="logo-mark sm"><use href="#yoki-mark"/></svg> YouOkay?</p>
+    <h1>Your Digital Habits. Your Mental Wellbeing. <span class="grad">A Clearer Perspective.</span></h1>
+    <p class="lead">Understand how your social media habits, academic lifestyle, sleep patterns, and everyday choices relate to your mental wellbeing through machine learning.</p>
+    <div class="actions">
+      <a href="#assessment" class="btn btn-primary">Check How You're Doing <i data-lucide="arrow-right"></i></a>
+      <a href="#about" class="btn btn-ghost">Discover YoKi</a>
+    </div>
+    <ul class="stats">
+      <li><b data-count="12">0</b><span>questions</span></li>
+      <li><b data-count="3">0</b><span>short steps</span></li>
+      <li><b data-count="12">0</b><span>platforms covered</span></li>
+    </ul>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 480 480" class="orbit-svg">
+      <circle cx="240" cy="240" r="200" class="ring r1"/><circle cx="240" cy="240" r="150" class="ring r2"/><circle cx="240" cy="240" r="100" class="ring r3"/>
+      <g class="spin-a"><circle cx="240" cy="40" r="7" fill="#b8aaff"/><circle cx="60" cy="300" r="5" fill="#7f9cf5"/></g>
+      <g class="spin-b"><circle cx="240" cy="90" r="6" fill="#7f9cf5"/><circle cx="390" cy="240" r="4" fill="#b8aaff"/></g>
+      <svg x="170" y="170" width="140" height="140" class="core"><use href="#yoki-mark"/></svg>
+    </svg>
+    <span class="chip c1"><i data-lucide="moon"></i>Sleep</span>
+    <span class="chip c2"><i data-lucide="smartphone"></i>Screen time</span>
+    <span class="chip c3"><i data-lucide="footprints"></i>Movement</span>
+    <span class="chip c4"><i data-lucide="brain"></i>Stress</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="head reveal"><h2>Habits leave patterns. YoKi looks for them.</h2></div>
+  <div class="three">
+    <article class="reveal"><i data-lucide="smartphone"></i><h3>Screens and routines</h3><p>Hours online, phone unlocks and what you use apps for often sit alongside how you study, move and rest.</p></article>
+    <article class="reveal"><i data-lucide="moon"></i><h3>Sleep, study, stress</h3><p>When screen time crowds out sleep or focus, everyday wellbeing can be affected. The details differ for everyone.</p></article>
+    <article class="reveal"><i data-lucide="cpu"></i><h3>What the model does</h3><p>A regression model trained on survey data turns your twelve answers into one predicted score, then YoKi explains your inputs.</p></article>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section tint" id="how">
+  <div class="head reveal"><h2>How YoKi works</h2><p>Select a step to see what happens.</p></div>
+  <ol class="flow reveal" id="flow">
+    <li><button class="step-btn active" data-i="0"><i data-lucide="pencil-line"></i><span>You answer</span></button></li>
+    <li><button class="step-btn" data-i="1"><i data-lucide="braces"></i><span>Data is structured</span></button></li>
+    <li><button class="step-btn" data-i="2"><i data-lucide="server"></i><span>FastAPI receives</span></button></li>
+    <li><button class="step-btn" data-i="3"><i data-lucide="cpu"></i><span>Model predicts</span></button></li>
+    <li><button class="step-btn" data-i="4"><i data-lucide="layout-dashboard"></i><span>You see results</span></button></li>
+  </ol>
+  <p class="flow-text" id="flowText" aria-live="polite"></p>
+  <ul class="tech reveal"><li>Python</li><li>Pandas</li><li>Machine Learning</li><li>Joblib</li><li>FastAPI</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+</section>
+
+<!-- ASSESSMENT -->
+<section class="section" id="assessment">
+  <div class="head reveal"><h2>How are you doing?</h2><p>Twelve answers. Nothing is stored by this page.</p></div>
+
+  <div class="card assess reveal" id="assessCard">
+    <!-- Form -->
+    <div id="formView">
+      <div class="assess-top">
+        <span class="logo on-light"><svg class="logo-mark sm"><use href="#yoki-mark"/></svg><span class="wordmark">Yo<b>Ki</b></span></span>
+        <span class="step-count" id="stepCount">Step 1 of 3</span>
+      </div>
+      <div class="bar"><i id="barFill"></i></div>
+      <div class="alert" id="formAlert" role="alert" hidden></div>
+
+      <form id="predictForm" novalidate>
+        <fieldset class="step active">
+          <legend>Personal information</legend><p class="muted">A little context about you.</p>
+          <div class="grid">
+            <div class="field" data-field="age"><label for="age">Age</label><input type="number" id="age" name="age" min="11" max="100" step="1" placeholder="e.g. 20" inputmode="numeric"><small class="hint">11 to 100</small><small class="err"></small></div>
+            <div class="field" data-field="gender"><label for="gender">Gender</label><select id="gender" name="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select><small class="err"></small></div>
+            <div class="field" data-field="country"><label for="country">Country</label><input type="text" id="country" name="country" list="countryList" placeholder="e.g. India" autocomplete="off"><datalist id="countryList"></datalist><small class="hint">Pick a suggestion or type your own</small><small class="err"></small></div>
+            <div class="field" data-field="academic_level"><label for="academic_level">Academic level</label><select id="academic_level" name="academic_level"><option value="">Select</option><option>High School</option><option>Undergraduate</option><option>Graduate</option></select><small class="err"></small></div>
+          </div>
+        </fieldset>
+        <fieldset class="step">
+          <legend>Social media habits</legend><p class="muted">How you use social platforms on a typical day.</p>
+          <div class="grid">
+            <div class="field" data-field="most_used_platform"><label for="most_used_platform">Most used platform</label><select id="most_used_platform" name="most_used_platform"><option value="">Select</option><option>Instagram</option><option>Facebook</option><option>Twitter</option><option>Snapchat</option><option>TikTok</option><option>LinkedIn</option><option>Youtube</option><option>LINE</option><option>KakaoTalk</option><option>VKontakte</option><option>Whatsapp</option><option>WeChat</option></select><small class="err"></small></div>
+            <div class="field" data-field="purpose_of_use"><label for="purpose_of_use">Purpose of use</label><select id="purpose_of_use" name="purpose_of_use"><option value="">Select</option><option>Entertainment</option><option>Education</option><option>News</option><option>Networking</option></select><small class="err"></small></div>
+            <div class="field" data-field="avg_daily_usage_hours"><label for="avg_daily_usage_hours">Average daily usage</label><div class="unit"><input type="number" id="avg_daily_usage_hours" name="avg_daily_usage_hours" min="0.1" max="24" step="0.1" placeholder="0.0" inputmode="decimal"><span>hrs</span></div><small class="hint">Above 0, up to 24</small><small class="err"></small></div>
+            <div class="field" data-field="daily_unlocks"><label for="daily_unlocks">Daily phone unlocks</label><input type="number" id="daily_unlocks" name="daily_unlocks" min="1" max="100" step="1" placeholder="e.g. 60" inputmode="numeric"><small class="hint">Whole number, 1 to 100</small><small class="err"></small></div>
+          </div>
+        </fieldset>
+        <fieldset class="step">
+          <legend>Lifestyle and wellbeing</legend><p class="muted">Study, movement, rest and stress.</p>
+          <div class="grid">
+            <div class="field" data-field="study_hours"><label for="study_hours">Study hours per day</label><div class="unit"><input type="number" id="study_hours" name="study_hours" min="0.1" max="24" step="0.1" placeholder="0.0" inputmode="decimal"><span>hrs</span></div><small class="err"></small></div>
+            <div class="field" data-field="physical_activity_hours"><label for="physical_activity_hours">Physical activity per day</label><div class="unit"><input type="number" id="physical_activity_hours" name="physical_activity_hours" min="0" max="24" step="0.1" placeholder="0.0" inputmode="decimal"><span>hrs</span></div><small class="hint">0 to 24</small><small class="err"></small></div>
+            <div class="field" data-field="sleep_hours_per_night"><label for="sleep_hours_per_night">Sleep per night</label><div class="unit"><input type="number" id="sleep_hours_per_night" name="sleep_hours_per_night" min="0.1" max="24" step="0.1" placeholder="0.0" inputmode="decimal"><span>hrs</span></div><small class="err"></small></div>
+            <div class="field" data-field="stress_level"><label for="stress_level">Stress level</label><select id="stress_level" name="stress_level"><option value="">Select</option><option>Low</option><option>Medium</option><option>High</option><option>Very High</option></select><small class="err"></small></div>
+          </div>
+        </fieldset>
+        <div class="form-nav">
+          <button type="button" class="btn btn-soft" id="prevBtn">Back</button>
+          <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn" hidden>Analyze My Wellbeing</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Loading -->
+    <div class="state" id="loadingView" hidden aria-live="polite">
+      <div class="pulse"><svg class="logo-mark"><use href="#yoki-mark"/></svg></div>
+      <h3>Analyzing your answers</h3><p class="muted">The model is generating your prediction.</p>
+    </div>
+
+    <!-- Results dashboard -->
+    <div id="resultView" hidden aria-live="polite">
+      <div class="res-top">
+        <div class="gauge">
+          <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" class="g-track"/><circle cx="100" cy="100" r="88" class="g-fill" id="gaugeFill"/></svg>
+          <div class="g-text"><span id="scoreValue">0.00</span><small>predicted score</small></div>
+        </div>
+        <div class="res-copy">
+          <span class="badge" id="classBadge">Classification requires calibration</span>
+          <h3>Your predicted wellbeing score</h3>
+          <p class="muted" id="classNote"></p>
+          <p class="muted">This is a machine learning prediction based only on the answers you submitted. It reflects patterns in the model's training data and is not a medical diagnosis.</p>
+        </div>
+      </div>
+
+      <h3 class="sub">Your Next Steps</h3>
+      <div class="recs" id="recs"></div>
+
+      <h3 class="sub">Your day in hours</h3>
+      <div class="bars" id="bars"></div>
+      <p class="muted small">Each bar shows hours out of a 24-hour day. Activities can overlap, so bars are not meant to add up.</p>
+
+      <button class="btn btn-primary" id="resetBtn" type="button"><i data-lucide="rotate-ccw"></i> Take Another Assessment</button>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS: KNOWLEDGE HUB -->
+<section class="section tint" id="insights">
+  <div class="head reveal"><h2>Good Reads. Better Understanding.</h2><p>Explore insights, research, and practical advice from mental health professionals.</p></div>
+  <div class="mag" id="mag"></div>
+  <p class="all reveal"><a class="btn btn-soft" href="https://www.nhs.uk/every-mind-matters/" target="_blank" rel="noopener noreferrer">View All Articles <i data-lucide="arrow-up-right"></i></a></p>
+
+  <div class="tools">
+    <!-- Daily tip -->
+    <div class="card tool reveal">
+      <h3><i data-lucide="lightbulb"></i> Daily digital wellness tip</h3>
+      <p class="tip" id="tipText" aria-live="polite"></p>
+      <div class="tip-foot"><span class="muted small" id="tipTopic"></span><button class="btn btn-soft sm" id="tipNext">Another tip</button></div>
+    </div>
+    <!-- Habit checklist -->
+    <div class="card tool reveal">
+      <h3><i data-lucide="check-check"></i> Healthy habit checklist <span class="muted small" id="habitCount"></span></h3>
+      <ul class="checks" id="checks"></ul>
+      <p class="muted small">Saved on this device only. Resets each day.</p>
+    </div>
+  </div>
+
+  <!-- Resources -->
+  <div class="resources reveal">
+    <div class="card tool">
+      <h3><i data-lucide="book-open"></i> Educational resources</h3>
+      <ul class="links">
+        <li><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-strengthening-our-response" target="_blank" rel="noopener noreferrer">WHO: Mental health fact sheet</a></li>
+        <li><a href="https://www.nimh.nih.gov/health/topics/caring-for-your-mental-health" target="_blank" rel="noopener noreferrer">NIMH: Caring for your mental health</a></li>
+        <li><a href="https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/your-mind-plan-quiz/" target="_blank" rel="noopener noreferrer">NHS Every Mind Matters: Mind Plan</a></li>
+      </ul>
+    </div>
+    <div class="card tool help">
+      <h3><i data-lucide="life-buoy"></i> Professional support services</h3>
+      <p class="muted small">Educational pages above are not a substitute for care. If you are struggling or in crisis, contact a qualified professional or a helpline.</p>
+      <ul class="links">
+        <li><a href="https://findahelpline.com/" target="_blank" rel="noopener noreferrer">Find a helpline in your country</a></li>
+        <li><a href="https://988lifeline.org/" target="_blank" rel="noopener noreferrer">988 Suicide &amp; Crisis Lifeline (United States)</a></li>
+        <li><a href="https://www.nimh.nih.gov/findhelp" target="_blank" rel="noopener noreferrer">NIMH: Find help for mental illnesses</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPER -->
+<section class="section dark dev" id="developer">
+  <div class="dev-grid">
+    <figure class="frame reveal">
+      <img src="assets/hardik.jpg" alt="Portrait of Hardik Madan" width="600" height="900" loading="lazy">
+    </figure>
+    <div class="dev-copy reveal">
+      <h2>Hello, I'm Hardik Madan.</h2>
+      <p>I'm a B.Tech Computer Science Engineering student at Manav Rachna University. I like programming, technology and machine learning, and I enjoy figuring out how technology can solve real problems. YoKi is one of those experiments.</p>
+      <p>Away from the keyboard, I play drums and percussion. I've performed with orchestras and on a number of stages, and I'm getting into music production. Badminton and cricket keep me moving. I believe the best technical learning happens when it's balanced with creativity.</p>
+      <blockquote>“Building with logic, creating with passion.”</blockquote>
+    </div>
+  </div>
+
+  <div class="skills reveal">
+    <div><h3>Programming and development</h3><ul class="tags"><li>Python</li><li>Java</li><li>C</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>SQL</li></ul></div>
+    <div><h3>Machine learning and data science</h3><ul class="tags"><li>ML Fundamentals</li><li>Data Preprocessing</li><li>Exploratory Data Analysis</li><li>Pandas</li><li>NumPy</li><li>Model Training and Evaluation</li><li>Data Visualization</li></ul></div>
+    <div><h3>Backend and tools</h3><ul class="tags"><li>FastAPI</li><li>REST API Integration</li><li>Pydantic</li><li>Joblib</li><li>Git and GitHub</li><li>VS Code</li><li>Jupyter Notebook</li><li>Google Colab</li></ul></div>
+    <p class="muted small">Technologies and concepts I have worked with while learning and building projects.</p>
+  </div>
+
+  <h3 class="beyond reveal">Beyond the Code</h3>
+  <ul class="beyond-list reveal">
+    <li><i data-lucide="music"></i>Drumming and percussion</li>
+    <li><i data-lucide="headphones"></i>Music production</li>
+    <li><i data-lucide="zap"></i>Badminton</li>
+    <li><i data-lucide="target"></i>Cricket</li>
+    <li><i data-lucide="sparkles"></i>Creative exploration</li>
+  </ul>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer dark">
+  <div class="foot-grid">
+    <div>
+      <a href="#home" class="logo"><svg class="logo-mark"><use href="#yoki-mark"/></svg><span class="wordmark">Yo<b>Ki</b></span></a>
+      <p class="fname">YouOkay?</p>
+      <p class="muted">A machine learning project relating social media habits and lifestyle to a predicted wellbeing score.</p>
+    </div>
+    <div><h4>Navigate</h4><a href="#about">About</a><a href="#how">How It Works</a><a href="#assessment">Assessment</a><a href="#developer">Developer</a></div>
+    <div><h4>Knowledge hub</h4><a href="#insights">Good Reads</a><a href="#checks">Habit checklist</a><a href="#tipText">Daily tip</a></div>
+  </div>
+  <p class="disclaimer">YouOkay? is an educational machine learning project. Its predictions are based on patterns learned from data and should not be interpreted as a clinical diagnosis or professional mental health assessment. If you are experiencing mental health difficulties, consider consulting a qualified mental health professional.</p>
+  <p class="copy">Developed by Hardik Madan &middot; &copy; <span id="year"></span> YouOkay? (YoKi)</p>
+</footer>
+</body>
+</html>
