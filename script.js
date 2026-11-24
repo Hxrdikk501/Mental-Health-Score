@@ -12,12 +12,6 @@ const TIMEOUT_MS = 15000;
    then runs a decorative sweep instead of a proportional fill. Example: { min: 0, max: 100 } */
 const SCORE_RANGE = { min: null, max: null };
 
-/* Classification thresholds. Leave null until the score meaning is established.
-   direction 'higher-is-better': score >= strong -> STRONG, >= weak -> MODERATE, else WEAK.
-   direction 'lower-is-better' : score <= strong -> STRONG, <= weak -> MODERATE, else WEAK.
-   Example: { direction: 'higher-is-better', strong: 70, weak: 40 } */
-const CLASSIFICATION = { direction: null, strong: null, weak: null };
-
 /* Thresholds that trigger recommendations. These are suggestion triggers only, not population benchmarks. */
 const REC = { usageHours: 4, unlocks: 50, sleepAdult: 7, sleepTeen: 8, activityHours: 0.5, studyHours: 2 };
 
@@ -288,13 +282,6 @@ async function requestPrediction(payload) {
 const views = { form: $('formView'), loading: $('loadingView'), result: $('resultView') };
 function show(name) { Object.entries(views).forEach(([k, el]) => { el.hidden = k !== name; }); if (name !== 'form') $('assessCard').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); }
 
-function classify(score) {
-  const { direction, strong, weak } = CLASSIFICATION;
-  if (!direction || strong == null || weak == null) return null;
-  if (direction === 'higher-is-better') return score >= strong ? 'STRONG' : score >= weak ? 'MODERATE' : 'WEAK';
-  return score <= strong ? 'STRONG' : score <= weak ? 'MODERATE' : 'WEAK';
-}
-
 /* Recommendations from the user's own inputs, sorted by how far past the trigger each one is. */
 function buildRecs(d) {
   const r = [];
@@ -325,11 +312,7 @@ function renderResult(score, d) {
     if (p < 1) requestAnimationFrame(tick); else out.textContent = score.toFixed(2);
   })(t0);
 
-  // Classification
-  const cls = classify(score), badge = $('classBadge');
-  badge.className = 'badge' + (cls ? ' ' + cls : '');
-  badge.textContent = cls || 'Classification requires calibration';
-  $('classNote').textContent = cls ? 'Category based on thresholds configured for this model.' : "The score's range and meaning haven't been set for this model, so YoKi doesn't label it as strong, moderate or weak.";
+
 
   // Next steps
   $('recs').innerHTML = buildRecs(d).map((r) => `<article class="rec"><div class="ico"><i data-lucide="${r.icon}"></i></div><h4>${r.title}</h4><p>${r.text}</p><p class="act">${r.act}</p></article>`).join('');

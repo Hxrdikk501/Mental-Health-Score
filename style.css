@@ -186,10 +186,10 @@ legend { font: 700 1.5rem var(--head); padding: 0; margin-bottom: 4px; } fieldse
 
 /* Developer */
 .dev { background: radial-gradient(800px 500px at 10% 0%, #1b2460, transparent 60%), var(--navy); }
-.dev-grid { display: grid; grid-template-columns: 380px 1fr; gap: 64px; align-items: center; }
+.dev-grid { display: grid; grid-template-columns: 1fr; gap: 56px; align-items: start; }
 .frame { position: relative; padding: 10px; border-radius: 28px; background: linear-gradient(145deg, rgba(184, 170, 255, .6), rgba(127, 156, 245, .15)); box-shadow: 0 30px 70px -30px rgba(139, 124, 246, .55); }
 .frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 28%; border-radius: 20px; }
-.dev-copy h2 { font-size: clamp(2rem, 3.8vw, 3rem); margin-bottom: 20px; } .dev-copy p { color: #c3c8e8; margin-bottom: 16px; max-width: 620px; }
+.dev-copy h2 { font-size: clamp(2rem, 3.8vw, 3rem); margin-bottom: 20px; } .dev-copy p { color: #c3c8e8; margin-bottom: 16px; max-width: 780px; }
 blockquote { margin-top: 26px; padding-left: 20px; border-left: 3px solid var(--lav); font: 600 1.4rem/1.3 var(--head); color: #fff; }
 .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 80px; } .skills h3 { font-size: 1.05rem; margin-bottom: 14px; color: var(--lav); } .skills > p { grid-column: 1 / -1; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; } .tags li { padding: 7px 13px; border-radius: 999px; font-size: .86rem; background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .12); transition: transform .2s, background .2s, border-color .2s; cursor: default; } .tags li:hover { transform: translateY(-3px); background: rgba(184, 170, 255, .16); border-color: var(--lav); }
