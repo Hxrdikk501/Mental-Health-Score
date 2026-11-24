@@ -5,7 +5,7 @@
 'use strict';
 
 /* ---------- CONFIG (edit these) ---------- */
-const API_URL = 'http://127.0.0.1:8000/predict';
+const API_URL = 'https://mental-health-score-tdd5.onrender.com';
 const TIMEOUT_MS = 15000;
 
 /* Score scale. Leave null until you know your model's target range; the gauge
