@@ -5,7 +5,7 @@
 'use strict';
 
 /* ---------- CONFIG (edit these) ---------- */
-const API_URL = 'https://mental-health-score-tdd5.onrender.com';
+const API_URL = 'https://mental-health-score-tdd5.onrender.com/predict'; // FastAPI backend endpoint (POST JSON, returns { predicted_mental_health_score: float })
 const TIMEOUT_MS = 15000;
 
 /* Score scale. Leave null until you know your model's target range; the gauge
